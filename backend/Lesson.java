@@ -2,10 +2,10 @@ package backend;
 
 import java.util.*;
 
-public class Lesson extends AbstractDisplay{
+public class Lesson extends AbstractDisplay {
 
     private String content;
-private List<String> resources;
+    private List<String> resources;
 
     public Lesson() {
 
@@ -13,7 +13,6 @@ private List<String> resources;
     }
 
     //setters w getters
-
     public String getContent() {
         return content;
     }
@@ -30,4 +29,3 @@ private List<String> resources;
         this.resources = resources;
     }
 }
-

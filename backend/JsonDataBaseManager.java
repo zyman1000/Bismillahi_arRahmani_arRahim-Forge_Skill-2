@@ -1,4 +1,5 @@
 package backend;
+import databaseservice.UserService;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,9 +21,6 @@ public class JsonDataBaseManager {
     private static List<String> coursIDs = new ArrayList<>();
     private static final String USERJSON_PATH = "users.json";
     private static final String COURSEJSON_PATH = "courses.json";
-    public static final String MAIN_PATH = "src/img/main.png";
-    public static final String LOGIN_PATH = "src/img/login.jpeg";
-    public static final String INSTRUCTOR_PATH = "src/img/Instructor.jpg";
     
     private static Gson getGSON(){
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -30,6 +28,7 @@ public class JsonDataBaseManager {
         Gson gson = gsonBuilder.create();
         return gson;
     }
+   
     private static void readUsers(){
         Gson gson = getGSON();
         users = new ArrayList<>();
@@ -49,7 +48,7 @@ public class JsonDataBaseManager {
             jarray = jelement.getAsJsonArray();
         }
         catch(java.lang.IllegalStateException e){
-            return; //file is empty, should not continue
+            return; 
         }
         for(int i = 0; i < jarray.size(); i++){
             JsonObject jobj = jarray.get(i).getAsJsonObject();
@@ -67,8 +66,8 @@ public class JsonDataBaseManager {
             userIDs.add(curr.getUserId());
         }
     }
+   
     private static void readCourses(){
-        readUsers();
         Gson gson = getGSON();
         String json = "";
         courses = new ArrayList<>();
@@ -81,14 +80,21 @@ public class JsonDataBaseManager {
             return;
         }
         Course[] courseArray = gson.fromJson(json, Course[].class);
-        if (courseArray != null)
+        if (courseArray != null){
             courses = new ArrayList<>(Arrays.asList(courseArray));
-        for (Course c : courses){
-            int index = userIDs.indexOf(c.getInstructorId());
-            Instructor curr = (Instructor) users.get(index);
-            curr.addCourse(c);
+            for (Course c : courses) {
+                int index = userIDs.indexOf(c.getInstructorId());
+                Instructor curr = (Instructor) users.get(index);
+                curr.addCourse(c);
+            }
         }
     }
+   
+    public static void loadFiles(){
+        readUsers();
+        readCourses();
+    }
+    
     private static void saveCourses(){
         Gson gson = getGSON();
         String json = gson.toJson(courses);
@@ -99,6 +105,7 @@ public class JsonDataBaseManager {
             System.out.println("IO exception found!");
         }
     }
+   
     private static void saveUsers(){
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder = gsonBuilder.setPrettyPrinting();
@@ -112,15 +119,27 @@ public class JsonDataBaseManager {
             System.out.println("IO exception found!");
         }
     }
+    
     public static void addUser(User u){
+        if(users.isEmpty()){
+            loadFiles();
+        }
         users.add(u);
         saveUsers();
     }
+ 
     public static void addCourse(Course c){
+        if(courses.isEmpty())
+            readCourses();
         courses.add(c);
         saveCourses();
+
     }
+    
     public static void updateUser(User u){
+        if(users.isEmpty()){
+            loadFiles();
+        }
         String UID = u.getUserId();
         for(int i = 0; i < users.size(); i++){
             if(users.get(i).getUserId().equals(UID)){
@@ -130,8 +149,12 @@ public class JsonDataBaseManager {
             }
         }
         saveUsers();
+        
     }
+  
     public static void updateCourse(Course c){
+        if(courses.isEmpty())
+            readCourses();
         String CID = c.getId();
         for(int i = 0; i < courses.size(); i++){
             if(courses.get(i).getId().equals(CID)){
@@ -141,26 +164,39 @@ public class JsonDataBaseManager {
             }
         }
         saveCourses();
+
     }
+   
     public static void removeUser(User u){
+        if(users.isEmpty())
+            loadFiles();
         users.remove(u);
         saveUsers();
     }
+  
     public static void removeCourse(Course c){
+        if(courses.isEmpty())
+            readCourses();
         courses.remove(c);
         saveCourses();
     }
+   
     public static List<User> getUsers(){
-        readUsers();
+        if (users.size() == 0)
+            loadFiles();
         return users;
     }
+ 
     public static List<Course> getCourses(){
-        readCourses();
+        if (courses.isEmpty())
+            readCourses();
         return courses;
     }
     
     public static void deleteCourse(String courseId) {
-    getCourses().removeIf(c -> c.getId().equals(courseId));
-    saveCourses();
-}
+        if (courses.isEmpty())
+            readCourses();
+        courses.removeIf(c -> c.getId().equals(courseId));
+        saveCourses();
+    }
 }   
