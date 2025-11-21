@@ -3,15 +3,18 @@ package User_Account_Management;
 import backend.Instructor;
 import backend.Student;
 import backend.User;
-import backend.UserService;
-import backend.Validation;
+import databaseservice.UserService;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class login extends javax.swing.JFrame {
     
     public login() {
+        
+        String LOGIN_PATH = "src/img/login.jpeg";
         initComponents();
         setLocationRelativeTo(null);
+        jLabel3.setIcon(new ImageIcon(LOGIN_PATH));
     }
     
     ///////////////////////////////////////////////////////////  
@@ -45,7 +48,6 @@ public class login extends javax.swing.JFrame {
         login = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -168,7 +170,7 @@ public class login extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, Short.MAX_VALUE)
+                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                 .addGap(333, 333, 333))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -297,11 +299,6 @@ public class login extends javax.swing.JFrame {
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 590));
 
-        jButton4.setBackground(new java.awt.Color(0, 51, 51));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("BACK");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, -1, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -322,7 +319,7 @@ public class login extends javax.swing.JFrame {
             if (selectedRole.equals(UserService.StudentRole)) {
                 new StudentDashboard((Student) user).setVisible(true);
             } else {
-                 new InstructorDashboard(((Instructor) user).getUserId()).setVisible(true);
+                 new InstructorDashboard((Instructor) user).setVisible(true);
             }
             this.dispose();
         }
@@ -382,7 +379,6 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFrame jFrame1;

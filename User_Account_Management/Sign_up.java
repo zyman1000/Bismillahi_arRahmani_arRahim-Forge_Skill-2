@@ -1,8 +1,9 @@
 package User_Account_Management;
+import databaseservice.UserService;
+import databaseservice.Validation;
 import backend.*;
 import java.awt.Color;
 import javax.swing.JFrame;
-//import databaseservice.UserService;
 public class Sign_up extends javax.swing.JFrame {
     
     JFrame frame = new JFrame();
@@ -10,9 +11,7 @@ public class Sign_up extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-///////////////////////////////////////////////////////////  
-      //1-add new user to files 
-      //2-validation
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
