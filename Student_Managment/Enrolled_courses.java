@@ -1,6 +1,7 @@
 package Student_Managment;
 
 
+import databaseservice.StudentService;
 import User_Account_Management.*;
 import javax.swing.JFrame;
 import backend.*;
@@ -247,22 +248,17 @@ public class Enrolled_courses extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
     StudentService studentservice = new StudentService();
-      //  int r = enrolled.getSelectedRow();
-     //  enrolled.getValueAt(r, 1).toString();
+
      int r = enrolled.getSelectedRow();
      Course course;
     if(r != -1) 
     {
         String ID = enrolled.getValueAt(r, 0).toString();
-//    int id = Integer.parseInt(ID);
-
         course = studentservice.getCoursebyid(ID);
-      //  course = studentservice.getCourseById(student, ID) ;
     }
     else{
         course = null;
     }
- //   new LESSON().setVisible(true); *******************************************************************************************************************************************************************************
         frame.dispose();
         new lessons(student , course).setVisible(true);
 
@@ -298,7 +294,6 @@ public class Enrolled_courses extends javax.swing.JPanel {
     
     for (String courseId : student.getCourses()) {
 
-        
         Course c = studentservice.getCoursebyid(courseId);
         
         if (c == null) continue;  

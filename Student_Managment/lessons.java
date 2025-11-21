@@ -1,10 +1,7 @@
 package Student_Managment;
-import Instructor_Management.LESSON;
+import databaseservice.StudentService;
 import javax.swing.table.DefaultTableModel;
-import User_Account_Management.*;
-import javax.swing.JFrame;
 import backend.*;
-import javax.swing.JTable;
 import User_Account_Management.welcome;
 import java.util.List;
 import javax.swing.JFrame;
@@ -300,47 +297,24 @@ public class lessons extends javax.swing.JPanel {
         String resourcesText = String.join("\n", resources);
 
         
-        READING readingWindow = new READING("the resourcesText IS",resourcesText);
-        readingWindow.setVisible(true);
+        READING p = new READING(lesson.getTitle(),resourcesText);
+        p.setVisible(true);
     }
         // GET CONTENT  FROM DATABASE AND WRITE IT IN PANEL READING
     }//GEN-LAST:event_updateButton2ActionPerformed
 
     private void updateButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton3ActionPerformed
-    /*int r = lessons.getSelectedRow();
-    if (r >= 0) {
-        String lessonId = lessons.getValueAt(r, 0).toString();
-        String lessonTitle = lessons.getValueAt(r, 1).toString();
 
-        
-        LESSON lessonDialog = new LESSON(null, true, lessonTitle);
-        lessonDialog.setVisible(true);
-
-        
-        StudentService ss = new StudentService();
-        Course currentCourse = course;
-
-        if (currentCourse != null) {
-            ss.lessonAccess(student, currentCourse, currentCourse.getLessonById(lessonId));
-        }
-
-        
-        loadLessonsTable();
-    }*/
-        int r = lessons.getSelectedRow();
+      int r = lessons.getSelectedRow();
     if (r >= 0) {
         String lessonId = lessons.getValueAt(r, 0).toString();
         Lesson lesson = course.getLessonById(lessonId); 
-
         
-        String content = lesson.getContent();
-        String resourcesText = String.join("\n", content);
-        READING readingWindow = new READING("the title is"+ "\n" +lesson.getTitle() ,"CONTENT is"+"\n"+content);
-        readingWindow.setVisible(true);
+        READING p = new READING(lesson.getTitle(),lesson.getContent());
+        p.setVisible(true);        
         
         StudentService ss = new StudentService();
         Course currentCourse = course;
-
         if (currentCourse != null) {
             ss.lessonAccess(student, currentCourse, currentCourse.getLessonById(lessonId));
         }

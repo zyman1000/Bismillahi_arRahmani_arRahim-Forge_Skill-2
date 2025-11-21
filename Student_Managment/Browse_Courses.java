@@ -1,11 +1,9 @@
 package Student_Managment;
-import javax.swing.table.DefaultTableModel;
+import databaseservice.StudentService;
 import java.util.List;
 import User_Account_Management.StudentDashboard;
 import User_Account_Management.welcome;
 import javax.swing.JFrame;
-import javax.swing.RowFilter;
-import javax.swing.table.TableRowSorter;
 import javax.swing.table.DefaultTableModel;
 import backend.*;
 public class Browse_Courses extends javax.swing.JPanel {
@@ -259,7 +257,7 @@ public class Browse_Courses extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
