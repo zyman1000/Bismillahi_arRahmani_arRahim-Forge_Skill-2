@@ -1,33 +1,35 @@
 package Instructor_Management;
 
+import databaseservice.Validation;
 import backend.Course;
-import backend.courseManagement;
+import databaseservice.CourseService;
 import backend.*;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 
 public class COURSE extends javax.swing.JDialog {
 
-    public String InstructorId;
-    private courseManagement courseManagement;
+    private Instructor instructor;
+    private CourseService courseManagement;
     private String courseId;
     private DefaultTableModel Model;
     private int r;
     private int select;
-    public COURSE(java.awt.Frame parent, boolean modal, String title, courseManagement manager, String instructorId, String CourseId, DefaultTableModel model, int r) {
+    public COURSE(java.awt.Frame parent, boolean modal, String title, CourseService manager, Instructor instructor, String CourseId, DefaultTableModel model, int r) {
 
         super(parent, modal);
         initComponents();
-        InstructorId = instructorId;
+        this.instructor = instructor;
         courseId = CourseId;
         select=1;
         this.courseManagement = manager;
         this.Model = model;
         this.r = r;
         setLocationRelativeTo(null);
-        for (Course c : manager.getCoursesByInstructor(instructorId)) {
+        for (Course c : manager.getCoursesByInstructor(instructor)) {
             if (c.getId().equals(courseId)) {
-                nameField1.setText(title);
-                nameField2.setText(c.getDescription());
+                titleField.setText(title);
+                descField.setText(c.getDescription());
 
                 break;
             }
@@ -35,12 +37,14 @@ public class COURSE extends javax.swing.JDialog {
 
     }
 
-    public COURSE(java.awt.Frame parent, boolean modal, String instructorId) {//add course
+    public COURSE(java.awt.Frame parent, boolean modal, Instructor instructor) {//add course
         super(parent, modal);
         initComponents();
         select=2;
-        InstructorId = instructorId;
+        this.instructor = instructor;
         setLocationRelativeTo(null);
+        this.courseManagement = new CourseService();
+
     }
 
     ////////////////////////////////////////////////////////////
@@ -64,8 +68,9 @@ public class COURSE extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        nameField1 = new javax.swing.JTextField();
-        nameField2 = new javax.swing.JTextField();
+        titleField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descField = new javax.swing.JTextArea();
 
         jPanel6.setOpaque(false);
 
@@ -81,6 +86,11 @@ public class COURSE extends javax.swing.JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setToolTipText("ADD STUDENT");
@@ -125,25 +135,24 @@ public class COURSE extends javax.swing.JDialog {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        nameField1.setBackground(new java.awt.Color(204, 204, 204));
-        nameField1.setForeground(new java.awt.Color(255, 255, 255));
-        nameField1.setCaretColor(new java.awt.Color(255, 255, 255));
-        nameField1.setSelectionColor(new java.awt.Color(255, 255, 255));
-        nameField1.addActionListener(new java.awt.event.ActionListener() {
+        titleField.setBackground(new java.awt.Color(204, 204, 204));
+        titleField.setCaretColor(new java.awt.Color(255, 255, 255));
+        titleField.setSelectionColor(new java.awt.Color(255, 255, 255));
+        titleField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                titleFieldFocusLost(evt);
+            }
+        });
+        titleField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameField1ActionPerformed(evt);
+                titleFieldActionPerformed(evt);
             }
         });
 
-        nameField2.setBackground(new java.awt.Color(204, 204, 204));
-        nameField2.setForeground(new java.awt.Color(255, 255, 255));
-        nameField2.setCaretColor(new java.awt.Color(255, 255, 255));
-        nameField2.setSelectionColor(new java.awt.Color(255, 255, 255));
-        nameField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameField2ActionPerformed(evt);
-            }
-        });
+        descField.setBackground(new java.awt.Color(204, 204, 204));
+        descField.setColumns(20);
+        descField.setRows(5);
+        jScrollPane1.setViewportView(descField);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,18 +167,17 @@ public class COURSE extends javax.swing.JDialog {
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(105, 105, 105)
-                                        .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
-                                .addComponent(nameField2)))))
+                                .addComponent(jScrollPane1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(105, 105, 105)
+                                .addComponent(titleField)))))
                 .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -188,12 +196,12 @@ public class COURSE extends javax.swing.JDialog {
                         .addComponent(jLabel10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(nameField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(nameField2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -220,8 +228,12 @@ public class COURSE extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-         String title = nameField1.getText();
-        String description = nameField2.getText();
+        String title = titleField.getText();
+        String description = descField.getText();
+        if(!Validation.verifyTitle(title) || !Validation.verifyContent(description)){
+            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "make sure title is valid and that description is not empty!");
+            return;
+        }
         if(select==1)
         {
        
@@ -230,19 +242,9 @@ public class COURSE extends javax.swing.JDialog {
         courseManagement.editCourse(courseId, title, description);
         dispose();
         }
-        else{
-      
-        Course newCourse=new Course();
-        newCourse.setTitle(title);
-        newCourse.setDescription(description);
-        newCourse.setInstructorId(InstructorId);
-        
-        if (newCourse.getId() == null || newCourse.getId().isEmpty()) {
-    newCourse.setId(java.util.UUID.randomUUID().toString());
-}
-        
-        JsonDataBaseManager.addCourse(newCourse);
-        dispose();
+        else {
+            courseManagement.createCourse(title, description, instructor);
+            dispose();
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -250,15 +252,26 @@ public class COURSE extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void nameField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameField1ActionPerformed
+    private void titleFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameField1ActionPerformed
+    }//GEN-LAST:event_titleFieldActionPerformed
 
-    private void nameField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameField2ActionPerformed
+    private void titleFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_titleFieldFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameField2ActionPerformed
+        String title = titleField.getText();
+        if(Validation.verifyTitle(title)){
+            titleField.setBackground(Color.green);
+        }
+        else
+            titleField.setBackground(Color.red);
+    }//GEN-LAST:event_titleFieldFocusLost
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea descField;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -266,9 +279,9 @@ public class COURSE extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField nameField1;
-    private javax.swing.JTextField nameField2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton saveButton;
+    private javax.swing.JTextField titleField;
     // End of variables declaration//GEN-END:variables
 
 }

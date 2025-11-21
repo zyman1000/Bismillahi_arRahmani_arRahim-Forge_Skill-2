@@ -1,5 +1,7 @@
 
 package Instructor_Management;
+import databaseservice.StudentService;
+import databaseservice.CourseService;
 import User_Account_Management.welcome;
 import javax.swing.JFrame;
 import backend.*;
@@ -11,33 +13,33 @@ public class view_enrolled_students extends  javax.swing.JPanel {
     private StudentService studentservice;
     String courseID;
     Course course;
-    String instructorId;
+    Instructor instructor;
   
-    public view_enrolled_students(String InstructorID,String courseID) {
+    public view_enrolled_students(Instructor instructor,String courseID) {
         this.courseID = courseID;
         studentservice = new StudentService();
-        courseManagement manager = new courseManagement();
+        CourseService manager = new CourseService();
         course = manager.getCoursebyid(courseID);
         List<String> students = course.getStudents();
-        this.instructorId = InstructorID;
+        this.instructor = instructor;
         
-        List<Course> courses = manager.getCoursesByInstructor(InstructorID) ;
+        List<Course> courses = manager.getCoursesByInstructor(instructor) ;
         
         initComponents();
         loadStudentsToTable(students);
 
     }
-     /*
+     
     public void setVisible(boolean f) {
         if (f) {
-            frame = new JFrame();
+            JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.getContentPane().add(this);
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         }
-    }*/
+    }
        ///////////////////////////////////////////////////////////  
       //1- LOAD IN TABELE FROM FILES AS NEEDED NOT ALL (DONT FORGET REMINDER)
   
@@ -181,7 +183,7 @@ public class view_enrolled_students extends  javax.swing.JPanel {
     JFrame topFrame = (JFrame) this.getTopLevelAncestor();
     topFrame.dispose();
 
-        new Manage_Courses(instructorId).setVisible(true);
+        new Manage_Courses(instructor).setVisible(true);
        
     }//GEN-LAST:event_jButton6ActionPerformed
 

@@ -5,25 +5,24 @@ import User_Account_Management.welcome;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import backend.courseManagement;
+import databaseservice.CourseService;
 import backend.*;
 
 
 import java.util.List;
+import databaseservice.StudentService;
 
 public class Manage_Courses extends javax.swing.JPanel {
-     private view_enrolled_students ves;
     private JFrame frame;
-    public String InstructorID;
-    private String courseId;
+    public Instructor instructor;
 
-    public Manage_Courses(String instructorId) {
+    public Manage_Courses(Instructor instructor) {
         initComponents();
-        this.InstructorID = instructorId;
-        courseManagement manager = new courseManagement();
-        List<Course> coursesList = manager.getCoursesByInstructor(instructorId);
+        this.instructor = instructor;
+        CourseService manager = new CourseService();
+        List<Course> coursesList = manager.getCoursesByInstructor(instructor);
         TableLoader.load((DefaultTableModel) courses.getModel(), coursesList);
-
+   
     }
 
    @Override
@@ -38,10 +37,6 @@ public class Manage_Courses extends javax.swing.JPanel {
         }
     }
 
-    ///////////////////////////////////////////////////////////  
-      // 1- MAKE DELETE BUTTON TO DELETE FROM FILE
-      //2- LOAD IN TABELE FROM FILES AS NEEDED NOT ALL 
-  
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -334,14 +329,14 @@ public class Manage_Courses extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        new COURSE(frame, true,InstructorID).setVisible(true);
-        courseManagement manager = new courseManagement();
         
-        List<Course> coursesList = manager.getCoursesByInstructor(InstructorID);
+        new COURSE(frame, true, instructor).setVisible(true);
+        
+        CourseService manager = new CourseService();
+        
+        List<Course> coursesList = manager.getCoursesByInstructor(instructor);
         TableLoader.load((DefaultTableModel) courses.getModel(), coursesList);
-       /* DefaultTableModel Model=courses.getModel();
-        Object[] row = { item.getId(), item.getTitle() };
-            odel.addRow(row);*/
+     
         
     }//GEN-LAST:event_updateButtonActionPerformed
 
@@ -359,7 +354,7 @@ public class Manage_Courses extends javax.swing.JPanel {
     }//GEN-LAST:event_coursesKeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new InstructorDashboard(InstructorID).setVisible(true);
+        new InstructorDashboard(instructor).setVisible(true);
         frame.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -370,22 +365,30 @@ public class Manage_Courses extends javax.swing.JPanel {
 
             if (confirm == JOptionPane.YES_OPTION) {
                 String courseId = courses.getValueAt(row, 0).toString();
-
-                JsonDataBaseManager.deleteCourse(courseId);
-
+                CourseService management = new CourseService();
+                management.deleteCourse(courseId, instructor);
+                
+                 StudentService.deletecourse(courseId);
                 ((DefaultTableModel) courses.getModel()).removeRow(row);
             }
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a course first");
         }
     }//GEN-LAST:event_updateButton1ActionPerformed
     public String courseID;
     private void updateButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton2ActionPerformed
         int r = courses.getSelectedRow();
+        if (r == -1){
+            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a course first");
+            return;
+        }
         courseID = courses.getValueAt(r, 0).toString();
 
         String courseName = courses.getValueAt(r, 1).toString();
-        courseManagement manager = new courseManagement();
+        CourseService manager = new CourseService();
         DefaultTableModel model = (DefaultTableModel) courses.getModel();
-        new COURSE(frame, true, courseName, manager, InstructorID, courseID, model, r).setVisible(true);
+        new COURSE(frame, true, courseName, manager, instructor, courseID, model, r).setVisible(true);
     }//GEN-LAST:event_updateButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -399,27 +402,23 @@ public class Manage_Courses extends javax.swing.JPanel {
     if (r >= 0) { 
         courseID = courses.getValueAt(r, 0).toString();
         System.out.println(courseID);
-
-       
-        view_enrolled_students ves = new view_enrolled_students(InstructorID, courseID);
-        JFrame frame = new JFrame("Enrolled Students");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.getContentPane().add(ves);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
+        new view_enrolled_students(instructor, courseID).setVisible(true);
+        this.frame.dispose();
     } else {
-        System.out.println("Please select a course first.");
+        javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a course first");
     }
     }//GEN-LAST:event_updateButton4ActionPerformed
 
     private void updateButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton5ActionPerformed
         int r = courses.getSelectedRow();
+        if(r == -1){
+            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a course first");
+            return;
+        }
         String courseID = courses.getValueAt(r, 0).toString();
 
         frame.dispose();
-        new Managelessons(courseID, InstructorID).setVisible(true);
+        new Managelessons(courseID, instructor).setVisible(true);
     }//GEN-LAST:event_updateButton5ActionPerformed
 
 

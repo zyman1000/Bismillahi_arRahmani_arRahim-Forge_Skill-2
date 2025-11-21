@@ -2,15 +2,16 @@ package Instructor_Management;
 
 import User_Account_Management.InstructorDashboard;
 import User_Account_Management.welcome;
+import backend.Instructor;
 import javax.swing.JFrame;
 
 public class Enrolled_students extends javax.swing.JPanel {
 
     private JFrame frame;
-    private String InstructorID;
-    public Enrolled_students(String instructorId) {
+    private Instructor instructor;
+    public Enrolled_students(Instructor instructor) {
         initComponents();
-        this.InstructorID=instructorId;
+        this.instructor= instructor;
     }
 
     @Override
@@ -264,7 +265,7 @@ public class Enrolled_students extends javax.swing.JPanel {
     }//GEN-LAST:event_enrolledKeyPressed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-             new InstructorDashboard(InstructorID).setVisible(true);
+             new InstructorDashboard(instructor).setVisible(true);
              frame.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 

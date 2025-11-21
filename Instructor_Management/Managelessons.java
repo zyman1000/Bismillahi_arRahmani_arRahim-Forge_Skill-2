@@ -1,24 +1,24 @@
 package Instructor_Management;
-
+import databaseservice.CourseService;
 import User_Account_Management.welcome;
-
 import backend.*;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import databaseservice.StudentService;
 
 public class Managelessons extends javax.swing.JPanel {
 
     private JFrame frame;
     public String courseId;
-    public String InstructorID;
+    public Instructor instructor;
 
-    public Managelessons(String courseId, String instID) {
+    public Managelessons(String courseId, Instructor instructor) {
         initComponents();
-        this.InstructorID = instID;
+        this.instructor = instructor;
         this.courseId = courseId;
-        courseManagement manager = new courseManagement();
+        CourseService manager = new CourseService();
         List<Lesson> LessonList = manager.getLessonsByCourse(courseId);
         TableLoader.load((DefaultTableModel) lessons.getModel(), LessonList);
 
@@ -26,7 +26,7 @@ public class Managelessons extends javax.swing.JPanel {
 
     private void refreshCourseTable() {
 
-        courseManagement manager = new courseManagement();
+        CourseService manager = new CourseService();
         List<Lesson> LessonList = manager.getLessonsByCourse(courseId);
         TableLoader.load((DefaultTableModel) lessons.getModel(), LessonList);
     }
@@ -322,7 +322,7 @@ public class Managelessons extends javax.swing.JPanel {
     }//GEN-LAST:event_lessonsKeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new Manage_Courses(InstructorID).setVisible(true);
+        new Manage_Courses(instructor).setVisible(true);
         frame.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -334,30 +334,38 @@ public class Managelessons extends javax.swing.JPanel {
 }
     if (row >= 0) { 
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
-        courseManagement manager = new courseManagement();
+        CourseService manager = new CourseService();
         if (confirm == JOptionPane.YES_OPTION) {
             String lessonId = lessons.getValueAt(row, 0).toString();
             manager.deleteLesson(courseId, lessonId);
+            StudentService.deletecompletedlesson(courseId,lessonId);
             ((DefaultTableModel)lessons.getModel()).removeRow(row);
             refreshCourseTable();
         }
     }
+    else{
+        javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
+
+    }
     }//GEN-LAST:event_updateButton1ActionPerformed
 
     private void updateButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton2ActionPerformed
-int r = lessons.getSelectedRow();
-if (r >= 0) {
-    String lessonId = lessons.getValueAt(r, 0).toString();
-    String lessonTitle = lessons.getValueAt(r, 1).toString();
+        int r = lessons.getSelectedRow();
+        if (r >= 0) {
+            String lessonId = lessons.getValueAt(r, 0).toString();
+            String lessonTitle = lessons.getValueAt(r, 1).toString();
 
-    courseManagement manager = new courseManagement();
-    LESSON updateDialog = new LESSON(frame, true, manager, courseId, lessonId, lessonTitle, (DefaultTableModel) lessons.getModel(), r);
-    updateDialog.setVisible(true);
+            CourseService manager = new CourseService();
+            LESSON updateDialog = new LESSON(frame, true, manager, courseId, lessonId, lessonTitle, (DefaultTableModel) lessons.getModel(), r);
+            updateDialog.setVisible(true);
 
-    
-    refreshCourseTable();
+            refreshCourseTable();
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
+        }
     }//GEN-LAST:event_updateButton2ActionPerformed
-    }
+
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         new welcome().setVisible(true);
         frame.dispose();
