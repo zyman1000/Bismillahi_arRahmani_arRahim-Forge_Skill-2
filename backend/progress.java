@@ -1,51 +1,48 @@
 package backend;
 
-import java.util.Set;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class progress {
 
     private String courseId;
-    private Set<String> completedLessons;
-
+    private List<StudentQuizRecord> LPlist;
+    
     public progress(String courseId) {
         this.courseId = courseId;
-        this.completedLessons = new HashSet<>();
-    }
-
-    public void completeLesson(String lessonId) {
-        completedLessons.add(lessonId);
-    }
-
-    public int getCompletedCount() {
-        return completedLessons.size();
-    }
-
-    public Set getCompletedLessons() {
-        return completedLessons;
-    }
-
-    public boolean isLessonCompleted(String lessonId) {
-        return completedLessons.contains(lessonId);
+        this.LPlist = new ArrayList<>();
     }
 
     public String getCourseId() {
         return courseId;
     }
 
-    public double getProgressPercentage(int totalLessons) {
-        if (totalLessons == 0) {
-            return 0;
-        }
-        return (completedLessons.size() * 100.0) / totalLessons;
+    public List<StudentQuizRecord> getLessonProgressList() {
+        return LPlist;
     }
 
-    public double getProgressPercentagebycourse(Course course) {
-        int totalLessons = course.getLessons().size();
-        if (totalLessons == 0) {
-            return 0;
+    public void addLessonProgress(String lessonId, Double quizMark, int remainingTrials, boolean isLessonCompleted) {
+        LPlist.add(new StudentQuizRecord(lessonId, quizMark, remainingTrials, isLessonCompleted));
+    }
+
+    public int getCompletedCount() {
+        int count = 0;
+        for (StudentQuizRecord lp : LPlist) {
+            if (lp.isLessonCompleted()) {
+                count++;
+            }
         }
-        return (completedLessons.size() * 100.0) / totalLessons;
+        return count;
+    }
+
+    public List<Double> getmarks() {
+        List<Double> m = new ArrayList<>();
+        if (LPlist.isEmpty()) 
+            return null;
+        for (StudentQuizRecord lp : LPlist) {
+            m.add(lp.getQuizMark());
+        }
+        return m;
     }
 
 }
