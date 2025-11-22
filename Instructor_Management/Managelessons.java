@@ -2,6 +2,7 @@ package Instructor_Management;
 import databaseservice.CourseService;
 import User_Account_Management.welcome;
 import backend.*;
+import databaseservice.ProgressService;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -423,19 +424,31 @@ public class Managelessons extends javax.swing.JPanel {
         if (row >= 0) {
 
             String lessonid = lessons.getValueAt(row, 0).toString();
-
-            // Get number of lessons in course
-            //int avg = ProgressService.marksbyid(lessonid).get_avg_marks();
-            // Get student_compleet_lesson
-            //int student_complete_lession = ProgressService.getcompletedlessonbyid(lessonid)
-            //int sum_all_student=userservice.getcountstudent();
+            /*
+           
+            List<Double> quiz_marks_all = ProgressService.getQuizMarks_allstudents_ForLesson(courseId,lessonid);
+            int count =quiz_marks_all.size();
+            Double sum=0.0;
+            int completed_student=0;
+            for(int i=0;i<count;i++){
+                Double x=quiz_marks_all.get(i).doubleValue();
+                sum+=x;
+                if(x>50)
+                    completed_student++; //student complete the lesson                    
+            }
+            Double avg_quiz =sum/count;// average of marks of student that complete the lesson
+            int  all_enrolled_student=ProgressService.get_enrolled_student(courseId).size();
+            */
+            
+            
+               
+            //test 
+            int all_enrolled_student=7;
+            int completedstudent=5;
+            double avg_quiz =87;
             
             chart_dispalay frame = new chart_dispalay();
-            
-            //test
-            int completedstudent=5;
-            int allstudent=7;
-            frame.showLessonProgressPie("lesson progress", "COMPLETED STUDENT:  ",completedstudent, allstudent-completedstudent);
+            frame.showLessonProgressPie("lesson progress", "Average Mark for all student:  ",avg_quiz,completedstudent, all_enrolled_student-completedstudent);
             
 
         } else {

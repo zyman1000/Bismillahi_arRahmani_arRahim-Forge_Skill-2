@@ -56,8 +56,8 @@
                           <Component id="EDIT_TABLE" min="-2" pref="621" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jButton7" max="32767" attributes="0"/>
-                                  <Component id="jButton8" max="32767" attributes="0"/>
+                                  <Component id="viewquizscores" max="32767" attributes="0"/>
+                                  <Component id="viewlessonprogress" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="360" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -86,12 +86,12 @@
               <EmptySpace pref="29" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton6" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                  <Component id="jButton8" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                  <Component id="viewlessonprogress" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton5" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                  <Component id="jButton7" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                  <Component id="viewquizscores" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
           </Group>
@@ -167,15 +167,12 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="1">
+              <Table columnCount="2" rowCount="1">
                 <Column editable="false" title="ID" type="java.lang.String">
                   <Data value="ahmed"/>
                 </Column>
                 <Column editable="false" title="NAME" type="java.lang.String">
                   <Data value="10000"/>
-                </Column>
-                <Column editable="false" title="PROGRESS" type="java.lang.String">
-                  <Data value="100"/>
                 </Column>
               </Table>
             </Property>
@@ -197,7 +194,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton7">
+    <Component class="javax.swing.JButton" name="viewquizscores">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="66" type="rgb"/>
@@ -211,10 +208,10 @@
         <Property name="text" type="java.lang.String" value="view quiz scores"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewquizscoresActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton8">
+    <Component class="javax.swing.JButton" name="viewlessonprogress">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="66" red="66" type="rgb"/>
@@ -228,7 +225,7 @@
         <Property name="text" type="java.lang.String" value="view lesson progress"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewlessonprogressActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

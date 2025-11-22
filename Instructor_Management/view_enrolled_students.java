@@ -5,6 +5,8 @@ import databaseservice.CourseService;
 import User_Account_Management.welcome;
 import javax.swing.JFrame;
 import backend.*;
+import databaseservice.ProgressService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -63,8 +65,8 @@ public class view_enrolled_students extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         EDIT_TABLE = new javax.swing.JScrollPane();
         enrolled = new javax.swing.JTable();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        viewquizscores = new javax.swing.JButton();
+        viewlessonprogress = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -105,17 +107,17 @@ public class view_enrolled_students extends javax.swing.JPanel {
         enrolled.setForeground(new java.awt.Color(255, 255, 255));
         enrolled.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"ahmed", "10000", "100"}
+                {"ahmed", "10000"}
             },
             new String [] {
-                "ID", "NAME", "PROGRESS"
+                "ID", "NAME"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -151,23 +153,23 @@ public class view_enrolled_students extends javax.swing.JPanel {
         });
         EDIT_TABLE.setViewportView(enrolled);
 
-        jButton7.setBackground(new java.awt.Color(102, 102, 102));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("view quiz scores");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        viewquizscores.setBackground(new java.awt.Color(102, 102, 102));
+        viewquizscores.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        viewquizscores.setForeground(new java.awt.Color(255, 255, 255));
+        viewquizscores.setText("view quiz scores");
+        viewquizscores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                viewquizscoresActionPerformed(evt);
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(102, 102, 102));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("view lesson progress");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        viewlessonprogress.setBackground(new java.awt.Color(102, 102, 102));
+        viewlessonprogress.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        viewlessonprogress.setForeground(new java.awt.Color(255, 255, 255));
+        viewlessonprogress.setText("view lesson progress");
+        viewlessonprogress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                viewlessonprogressActionPerformed(evt);
             }
         });
 
@@ -183,8 +185,8 @@ public class view_enrolled_students extends javax.swing.JPanel {
                             .addComponent(EDIT_TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(viewquizscores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(viewlessonprogress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,11 +206,11 @@ public class view_enrolled_students extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(viewlessonprogress, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(viewquizscores, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -242,7 +244,7 @@ public class view_enrolled_students extends javax.swing.JPanel {
 
     }//GEN-LAST:event_enrolledKeyPressed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void viewquizscoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewquizscoresActionPerformed
         int row = enrolled.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(this, "Please select a lesson to delete.");
@@ -253,62 +255,75 @@ public class view_enrolled_students extends javax.swing.JPanel {
             String studentId = enrolled.getValueAt(row, 0).toString();
             String studentname = enrolled.getValueAt(row, 1).toString();
 
-            // Get quiz marks for a student
-            // List<Integer> scores = ProgressService.getQuizMarksById(studentId);
-            // Get quiz titles or lesson titles
-            //List<String> titles = CourseService.getTitles(scores.size());
-            chart_dispalay frame = new chart_dispalay();
-            frame.setVisible(true);
+            /*
+             List<Integer> scores = ProgressService.getQuizMarksById(studentId,courseID);
+             ArrayList<String> quizzes = new ArrayList();
+             for (int i = 0; i < scores.size(); i++) {
+                quizzes.add("quiz " + (i + 1));
+            }
+             int sum = 0;
+             for (int score : scores) {
+                sum += score;
+            }*/
+            
+            //test
             List<Integer> scores = List.of(85, 90, 70);
-            List<String> lessons = List.of("Lesson 1", "Lesson 2", "Lesson 3");
+            ArrayList<String> quizzes = new ArrayList();
+            for (int i = 0; i < scores.size(); i++) {
+                quizzes.add("quiz " + (i + 1));
+            }
             int sum = 0;
             for (int score : scores) {
                 sum += score;
             }
+
+            chart_dispalay frame = new chart_dispalay();
+            frame.setVisible(true);
             frame.showChart(
                     "Student Quiz Scores", // chartTitle
                     "Lessons", // xAxisTitle
                     "Score", // yAxisTitle
                     studentname, // seriesName
-                    lessons, // xData
+                    quizzes, // xData
                     scores,
                     "AVREAGE SCORE: ",
-                     (sum/scores.size()*100)  // yData
-);
+                    (sum / (scores.size() * 100)) // yData
+            );
 
         } else {
             showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
 
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_viewquizscoresActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void viewlessonprogressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewlessonprogressActionPerformed
         int row = enrolled.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(this, "Please select a lesson to delete.");
             return;
         }
         if (row >= 0) {
-
+            /*
             String studentId = enrolled.getValueAt(row, 0).toString();
-
-            // Get number of lessons in course
-            //int x = courseservice.getCoursebyid(courseID).get_lessoncount();
-            // Get completed_count
-            //int completed = ProgressService.getcompletedcountby_id(studentId)
+            Course c=ob.getcoursebyid(courseID)
+            int all =c.getcountlesson() ;// when course modified add get all count of lessons
+            int completed = ProgressService.get_completedlessons_student(studentId, courseID);
+          
+            double progress = (double) completed / all;
+             */
+            //test
+            int all = 17;
+            int completed = 10;
+            double progress = (double) completed / all;
             chart_dispalay frame = new chart_dispalay();
             frame.setVisible(true);
-
-            //test
-            int completed = 5;
-            int x = 7;
-            frame.showLessonProgressPie("lesson progress", "PROGRESS IN COURSE: ", completed, x - completed);
+            frame.showLessonProgressPie("lesson progress", "PROGRESS IN COURSE: ", progress*100, completed, all - completed);
 
         } else {
             showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
 
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_viewlessonprogressActionPerformed
 
     private void loadStudentsToTable(List<String> studentIDs) {
 
@@ -319,16 +334,10 @@ public class view_enrolled_students extends javax.swing.JPanel {
 
         for (String id : studentIDs) {
             Student s = (Student) studentservice.getStudentbyid(id);
-            List<progress> progress = s.getProgress();
-            progress p = studentservice.getProgressByCourseId(progress, courseID);
             if (s != null) {
                 Object[] row = {
                     s.getUserId(),
-                    s.getUsername(),
-                    p.getProgressPercentagebycourse(course)
-
-                };
-
+                    s.getUsername(),};
                 model.addRow(row);
             }
         }
@@ -340,10 +349,10 @@ public class view_enrolled_students extends javax.swing.JPanel {
     public javax.swing.JTable enrolled;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton viewlessonprogress;
+    private javax.swing.JButton viewquizscores;
     // End of variables declaration//GEN-END:variables
 }

@@ -43,10 +43,9 @@ public class chart_dispalay extends javax.swing.JPanel {
 
     }
 
-    public void showLessonProgressPie(String Title,String title2, int completed, int notcompleted) {
+    public void showLessonProgressPie(String Title,String title2,Double percent, int completed, int notcompleted) {
       
         
-        double percent = ((double) completed / (completed + notcompleted)) * 100;
         JLabel label = new JLabel(title2+ String.format("%.1f%%", percent));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 35));

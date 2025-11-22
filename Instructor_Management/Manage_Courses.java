@@ -7,9 +7,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import databaseservice.CourseService;
 import backend.*;
+import databaseservice.ProgressService;
 
 import java.util.List;
 import databaseservice.StudentService;
+import java.util.ArrayList;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Manage_Courses extends javax.swing.JPanel {
@@ -445,21 +447,34 @@ public class Manage_Courses extends javax.swing.JPanel {
         if (row >= 0) {
 
             String courseid = courses.getValueAt(row, 0).toString();
+            /*
+            List<Student>  all_enrolled_student=ProgressService.get_enrolled_student(courseid);
+            List<String> names =new ArrayList();
+            List<Integer> progress =new ArrayList();
+            for(int i=0;i<all_enrolled_student.size();i++){
+                names.add(all_enrolled_student.get(i).getUsername());
+            }
+            for(int i=0;i<all_enrolled_student.size();i++){
+                String id=all_enrolled_student.get(i).getUserId();
+                int count=ProgressService.get_completedlessons_student(id,courseid);    
+                int all_lessons=ProgressService.getCoursebyid(courseid).getLessons().size();         
+                progress.add((count/all_lessons)*100);
+            }
+             */
 
-            // Get progress of every student in this course course
-            //List<Integer> progress = ProgressService.progress_course(courseid);
-            // Get all enrolled student in this course
-            //List<String> names = userservice.getname_enrolled(courseid);
-            chart_dispalay frame = new chart_dispalay();
-            frame.setVisible(true);
-            List<Integer> progress = List.of(85, 90, 70);
-            List<String> names = List.of("ahmed", "mohamed", "zyad");
+            //test
+            List<Integer> progress = List.of(85, 90, 70,100);
+            List<String> names = List.of("ahmed", "mohamed", "zyad","mohaned");
             int completedCount = 0;
             for (int p : progress) {
                 if (p == 100) {
                     completedCount++;
                 }
             }
+
+            chart_dispalay frame = new chart_dispalay();
+            frame.setVisible(true);
+
             frame.showChart(
                     "Student Course progress", //Title
                     "names", // name of x-axis
@@ -468,7 +483,9 @@ public class Manage_Courses extends javax.swing.JPanel {
                     names, // x-data
                     progress,//y-data
                     "completed student: ",//how many student complete course(title)
-                    completedCount////how many student complete course(calculation))
+                    completedCount
+          
+            ////how many student complete course(calculation))
                  
            );} else {
             showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
