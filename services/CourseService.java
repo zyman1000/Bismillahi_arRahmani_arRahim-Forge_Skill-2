@@ -143,9 +143,11 @@ public class CourseService {
        for(Course c : courses){
            if(c.getId().equals(courseID)){
                c.setApprovalStatus(status);
-               return;
+               System.out.println("COURSE STATUS SET TO ACCEPTED");
+               break;
            }
        }
+       JsonDataBaseManager.updateCourses();
     }
     public static void AcceptCourse(String courseID){
        modifyCourseStatus(courseID, Course.ACCEPTED);

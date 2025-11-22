@@ -169,6 +169,9 @@ public class JsonDataBaseManager {
         saveCourses();
 
     }
+    public static void updateCourses(){
+        saveCourses();
+    }
    
     public static void removeUser(User u){
         if(users.isEmpty())
