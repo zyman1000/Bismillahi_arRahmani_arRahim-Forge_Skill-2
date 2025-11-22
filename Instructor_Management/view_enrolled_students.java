@@ -303,18 +303,19 @@ public class view_enrolled_students extends javax.swing.JPanel {
             return;
         }
         if (row >= 0) {
-            /*
+            
             String studentId = enrolled.getValueAt(row, 0).toString();
-            Course c=ob.getcoursebyid(courseID)
-            int all =c.getcountlesson() ;// when course modified add get all count of lessons
+            /*
+            Course c=ProgressService.getCoursebyid(courseID);
+            int all =c.getLessons().size() ;// when course modified add get all count of lessons
             int completed = ProgressService.get_completedlessons_student(studentId, courseID);
-          
             double progress = (double) completed / all;
-             */
+            */ 
+            
             //test
-            int all = 17;
-            int completed = 10;
-            double progress = (double) completed / all;
+           int all = 17;
+           int completed = 10;
+           double progress = (double) completed / all;
             chart_dispalay frame = new chart_dispalay();
             frame.setVisible(true);
             frame.showLessonProgressPie("lesson progress", "PROGRESS IN COURSE: ", progress*100, completed, all - completed);

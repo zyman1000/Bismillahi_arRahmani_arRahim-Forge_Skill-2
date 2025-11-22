@@ -1,4 +1,5 @@
 package Instructor_Management;
+
 import databaseservice.CourseService;
 import User_Account_Management.welcome;
 import backend.*;
@@ -357,24 +358,23 @@ public class Managelessons extends javax.swing.JPanel {
     private void updateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton1ActionPerformed
         int row = lessons.getSelectedRow();
         if (row < 0) {
-    JOptionPane.showMessageDialog(this, "Please select a lesson to delete.");
-    return;
-}
-    if (row >= 0) { 
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
-        CourseService manager = new CourseService();
-        if (confirm == JOptionPane.YES_OPTION) {
-            String lessonId = lessons.getValueAt(row, 0).toString();
-            manager.deleteLesson(courseId, lessonId);
-            StudentService.deletecompletedlesson(courseId,lessonId);
-            ((DefaultTableModel)lessons.getModel()).removeRow(row);
-            refreshCourseTable();
+            JOptionPane.showMessageDialog(this, "Please select a lesson to delete.");
+            return;
         }
-    }
-    else{
-        javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
+        if (row >= 0) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+            CourseService manager = new CourseService();
+            if (confirm == JOptionPane.YES_OPTION) {
+                String lessonId = lessons.getValueAt(row, 0).toString();
+                manager.deleteLesson(courseId, lessonId);
+                StudentService.deletecompletedlesson(courseId, lessonId);
+                ((DefaultTableModel) lessons.getModel()).removeRow(row);
+                refreshCourseTable();
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
 
-    }
+        }
     }//GEN-LAST:event_updateButton1ActionPerformed
 
     private void updateButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton2ActionPerformed
@@ -388,8 +388,7 @@ public class Managelessons extends javax.swing.JPanel {
             updateDialog.setVisible(true);
 
             refreshCourseTable();
-        }
-        else{
+        } else {
             javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
         }
     }//GEN-LAST:event_updateButton2ActionPerformed
@@ -400,7 +399,7 @@ public class Managelessons extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        new LESSON(frame, true,courseId).setVisible(true);
+        new LESSON(frame, true, courseId).setVisible(true);
         refreshCourseTable();
     }//GEN-LAST:event_updateButtonActionPerformed
 
@@ -416,7 +415,7 @@ public class Managelessons extends javax.swing.JPanel {
     }//GEN-LAST:event_updateButton3ActionPerformed
 
     private void updateButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton4ActionPerformed
-           int row = lessons.getSelectedRow();
+        int row = lessons.getSelectedRow();
         if (row < 0) {
             JOptionPane.showMessageDialog(this, "Please select a lesson to delete.");
             return;
@@ -424,32 +423,29 @@ public class Managelessons extends javax.swing.JPanel {
         if (row >= 0) {
 
             String lessonid = lessons.getValueAt(row, 0).toString();
+            
             /*
-           
-            List<Double> quiz_marks_all = ProgressService.getQuizMarks_allstudents_ForLesson(courseId,lessonid);
-            int count =quiz_marks_all.size();
-            Double sum=0.0;
-            int completed_student=0;
-            for(int i=0;i<count;i++){
-                Double x=quiz_marks_all.get(i).doubleValue();
-                sum+=x;
-                if(x>50)
+            List<StudentQuizRecord> quiz_marks_all = ProgressService.getQuizrecords_allstudents_ForLesson(courseId, lessonid);
+            int count = quiz_marks_all.size();
+            double sum = 0.0;
+            int completed_student = 0;
+            for (int i = 0; i < count; i++) {
+                sum += quiz_marks_all.get(i).getScore();
+                if (quiz_marks_all.get(i).isPassed()) {
                     completed_student++; //student complete the lesson                    
+                }
             }
-            Double avg_quiz =sum/count;// average of marks of student that complete the lesson
-            int  all_enrolled_student=ProgressService.get_enrolled_student(courseId).size();
-            */
+            Double avg_quiz = sum / count;// average of marks of student that complete the lesson
+            int all_enrolled_student = ProgressService.get_enrolled_student(courseId).size();
+             */
             
-            
-               
             //test 
-            int all_enrolled_student=7;
-            int completedstudent=5;
-            double avg_quiz =87;
-            
+            int all_enrolled_student = 7;
+            int completedstudent = 5;
+            double avg_quiz = 87;
+
             chart_dispalay frame = new chart_dispalay();
-            frame.showLessonProgressPie("lesson progress", "Average Mark for all student:  ",avg_quiz,completedstudent, all_enrolled_student-completedstudent);
-            
+            frame.showLessonProgressPie("lesson progress", "Average Mark for all student:  ", avg_quiz, completedstudent, all_enrolled_student - completedstudent);
 
         } else {
             showMessageDialog(new javax.swing.JFrame(), "please select a lesson first");
