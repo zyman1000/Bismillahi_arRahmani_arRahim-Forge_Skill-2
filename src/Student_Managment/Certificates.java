@@ -49,6 +49,11 @@ public class Certificates extends javax.swing.JFrame {
 
         backButton.setText("back");
         backButton.setToolTipText("");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         viewButton.setText("view");
         viewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +102,12 @@ public class Certificates extends javax.swing.JFrame {
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        new Enrolled_courses(student).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
     
     public static void load(DefaultTableModel model, List<Certificate> list) {
         model.setRowCount(0);

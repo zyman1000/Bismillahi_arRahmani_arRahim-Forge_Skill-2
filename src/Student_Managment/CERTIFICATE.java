@@ -25,8 +25,10 @@ public class CERTIFICATE extends javax.swing.JFrame {
      */
     private Certificate cert;
     private String data[];
+    private Student student;
     public CERTIFICATE(String courseID, Student student) {
         initComponents();
+        this.student = student;
         this.cert = CertificateService.generateCertificate(courseID, student);
         System.out.println("STUDENT ENTERING GET CERTIFICATE DATA:\n" + cert.getstudentID());
         this.data = CertificateService.getCertificateData(cert).clone();
@@ -83,6 +85,11 @@ public class CERTIFICATE extends javax.swing.JFrame {
         certificateID.setText("certificateID");
 
         backButton.setText("back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         printButton.setText("print");
         printButton.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +196,12 @@ public class CERTIFICATE extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_printButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        new Certificates(student).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

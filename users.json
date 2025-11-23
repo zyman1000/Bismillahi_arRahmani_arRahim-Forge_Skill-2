@@ -9,7 +9,14 @@
         "completedLessons": []
       }
     ],
-    "certificates": [],
+    "certificates": [
+      {
+        "studentID": "06165",
+        "courseID": "e7348b32-8a1d-498a-b139-dcf4e3a05767",
+        "certificateID": "06981",
+        "issueDate": "Sun Nov 23 21:39:17 EET 2025"
+      }
+    ],
     "userId": "06165",
     "username": "student",
     "email": "student@gmail.com",
