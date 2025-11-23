@@ -1,0 +1,33 @@
+[
+  {
+    "courses": [
+      "e7348b32-8a1d-498a-b139-dcf4e3a05767"
+    ],
+    "progressList": [
+      {
+        "courseId": "e7348b32-8a1d-498a-b139-dcf4e3a05767",
+        "completedLessons": []
+      }
+    ],
+    "certificates": [],
+    "userId": "06165",
+    "username": "student",
+    "email": "student@gmail.com",
+    "passwordHash": "855171d571821669e4998e6a4ec2821fd10f72a59827e0141ce233806c2255e5",
+    "role": "Student"
+  },
+  {
+    "userId": "00345",
+    "username": "instructor",
+    "email": "instructor@gmail.com",
+    "passwordHash": "855171d571821669e4998e6a4ec2821fd10f72a59827e0141ce233806c2255e5",
+    "role": "Instructor"
+  },
+  {
+    "userId": "02359",
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "passwordHash": "855171d571821669e4998e6a4ec2821fd10f72a59827e0141ce233806c2255e5",
+    "role": "Admin"
+  }
+]

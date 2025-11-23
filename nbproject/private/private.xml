@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/backend/Admin.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/backend/Instructor.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/services/UserService.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/services/AdminService.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/User_Account_Management/InstructorDashboard.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/User_Account_Management/StudentDashboard.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/User_Account_Management/AdminDashboard.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/backend/Course.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Adming_Management/manage_courses.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Instructor_Management/view_enrolled_students.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Instructor_Management/COURSE.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/User_Account_Management/login.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/User_Account_Management/Sign_up.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Instructor_Management/Manage_Courses.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Student_Managment/Enrolled_courses.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Student_Managment/Browse_Courses.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/backend/TableLoader.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/services/CourseService.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/backend/JsonDataBaseManager.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Instructor_Management/LESSON.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Instructor_Management/Managelessons.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/services/StudentService.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/backend/Certificate.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/backend/Student.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Student_Managment/Certificates.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/backend/AbstractDisplay.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/User_Account_Management/welcome.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Student_Managment/lessons.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Adming_Management/Details.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Adming_Management/READING.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/services/CertificateService.java</file>
+            <file>file:/home/zeyad/NetBeansProjects/lab8/src/Student_Managment/CERTIFICATE.java</file>
+        </group>
+    </open-files>
+</project-private>

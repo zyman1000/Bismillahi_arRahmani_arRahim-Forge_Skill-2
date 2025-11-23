@@ -1,0 +1,12 @@
+Instructor_Management.Manage_Courses$1
+Instructor_Management.Manage_Courses$2
+Instructor_Management.Manage_Courses$3
+Instructor_Management.Manage_Courses$4
+Instructor_Management.Manage_Courses$9
+Instructor_Management.Manage_Courses$5
+Instructor_Management.Manage_Courses
+Instructor_Management.Manage_Courses$6
+Instructor_Management.Manage_Courses$7
+Instructor_Management.Manage_Courses$10
+Instructor_Management.Manage_Courses$8
+Instructor_Management.Manage_Courses$11
