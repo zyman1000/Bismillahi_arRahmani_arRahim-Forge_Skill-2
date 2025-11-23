@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import services.CertificateService;
 import services.CourseService;
+import services.PDFService;
 
 /**
  *
@@ -26,11 +27,17 @@ public class CERTIFICATE extends javax.swing.JFrame {
     private Certificate cert;
     private String data[];
     private Student student;
-    public CERTIFICATE(String courseID, Student student) {
+    public CERTIFICATE(String ID, Student student, boolean generate) {
         initComponents();
         this.student = student;
-        this.cert = CertificateService.generateCertificate(courseID, student);
-        System.out.println("STUDENT ENTERING GET CERTIFICATE DATA:\n" + cert.getstudentID());
+        if(generate)
+            this.cert = CertificateService.generateCertificate(ID, student);
+        else
+            this.cert = CertificateService.getStudentCertificateByID(student, ID);
+        this.data = CertificateService.getCertificateData(cert).clone();
+        display();
+    }
+    private void display(){
         this.data = CertificateService.getCertificateData(cert).clone();
         this.studentName.setText(data[0]);
         this.courseName.setText(data[1]);
@@ -39,7 +46,6 @@ public class CERTIFICATE extends javax.swing.JFrame {
         this.DateField.setText(data[4]);
         this.certificateID.setText(data[5]);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -188,7 +194,7 @@ public class CERTIFICATE extends javax.swing.JFrame {
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
         // TODO add your handling code here:
         try{
-            CertificateService.savePDF(cert, this.data.clone());
+            PDFService.savePDF(cert, this.data.clone());
         }
         catch(IOException e){
             System.out.println("IO EXCEPTION FOUND!");

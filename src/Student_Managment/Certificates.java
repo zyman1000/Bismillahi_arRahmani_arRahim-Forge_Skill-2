@@ -1,6 +1,7 @@
 
 package Student_Managment;
 
+import User_Account_Management.StudentDashboard;
 import backend.AbstractDisplay;
 import backend.Certificate;
 import backend.Course;
@@ -36,13 +37,13 @@ public class Certificates extends javax.swing.JFrame {
 
         certificatesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "course", "instructor", "issue date"
+                "CertificateID", "course", "instructor", "issue date"
             }
         ));
         jScrollPane1.setViewportView(certificatesTable);
@@ -101,11 +102,19 @@ public class Certificates extends javax.swing.JFrame {
 
     private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         // TODO add your handling code here:
+        int r = certificatesTable.getSelectedRow();
+        if(r == -1){
+            //warning
+            return;
+        }
+        String certID = certificatesTable.getValueAt(r, 0).toString();
+        new CERTIFICATE(certID, student, false).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_viewButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        new Enrolled_courses(student).setVisible(true);
+        new StudentDashboard(student).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
     
@@ -115,7 +124,7 @@ public class Certificates extends javax.swing.JFrame {
          CourseService uselessObject = new CourseService();
         for (Certificate item : list) {
             Course course = uselessObject.getCoursebyid(item.getcourseID());
-            Object[] row = { course.getTitle(), UserService.getUserByID(course.getInstructorId()), item.getissueDate()};
+            Object[] row = { item.getCertificateID(),course.getTitle(), UserService.getUserByID(course.getInstructorId()), item.getissueDate()};
             model.addRow(row);
         }
     }

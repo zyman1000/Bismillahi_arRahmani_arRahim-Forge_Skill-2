@@ -308,7 +308,7 @@ public class Enrolled_courses extends javax.swing.JPanel {
         if(r == -1)
             return;
         String courseID = enrolled.getValueAt(r, 0).toString();
-        new CERTIFICATE(courseID, student).setVisible(true);
+        new CERTIFICATE(courseID, student, true).setVisible(true);
     }//GEN-LAST:event_certificateActionPerformed
     
     
