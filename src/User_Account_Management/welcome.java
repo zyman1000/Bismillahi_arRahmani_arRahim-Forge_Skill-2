@@ -1,8 +1,5 @@
 package User_Account_Management;
 
-import java.io.IOException;
-import services.CertificateService;
-
 public class welcome extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(welcome.class.getName());

@@ -1,9 +1,0 @@
-Student_Managment.lessons$7
-Student_Managment.lessons$8
-Student_Managment.lessons$5
-Student_Managment.lessons$6
-Student_Managment.lessons$3
-Student_Managment.lessons
-Student_Managment.lessons$4
-Student_Managment.lessons$1
-Student_Managment.lessons$2

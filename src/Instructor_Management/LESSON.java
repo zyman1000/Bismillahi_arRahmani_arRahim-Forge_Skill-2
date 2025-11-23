@@ -1,8 +1,8 @@
 package Instructor_Management;
 
-import services.Validation;
+import databaseservice.Validation;
 import backend.Lesson;
-import services.CourseService;
+import databaseservice.CourseService;
 import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
@@ -253,6 +253,10 @@ public class LESSON extends javax.swing.JDialog {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         String title = titleField.getText();
         String content = contentField.getText();
+        String resourcesText = resourcesField.getText();
+        List<String> resources = Arrays.asList(resourcesText.split("\n"));
+            
+            
         if (!Validation.verifyTitle(title) || !Validation.verifyContent(content)) {
             javax.swing.JOptionPane.showMessageDialog(new javax.swing.JFrame(), "make sure title is valid and that content is not empty!");
             return;
@@ -260,13 +264,10 @@ public class LESSON extends javax.swing.JDialog {
         if (selectt == 1) {
             Model.setValueAt(lessonId, r, 0);
             Model.setValueAt(title, r, 1);
-            manager.editLesson(cId, lessonId, title, content, re);
+            manager.editLesson(cId, lessonId, title, content, resources);
             dispose();
         } else {
-            String resourcesText = resourcesField.getText();
 
-           
-            List<String> resources = Arrays.asList(resourcesText.split("\n"));
 
             Lesson newLesson = new Lesson();
             newLesson.setTitle(title);

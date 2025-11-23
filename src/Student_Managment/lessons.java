@@ -1,17 +1,21 @@
 package Student_Managment;
-import services.StudentService;
+
+import databaseservice.StudentService;
 import javax.swing.table.DefaultTableModel;
 import backend.*;
 import User_Account_Management.welcome;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class lessons extends javax.swing.JPanel {
-    private Student student ;
-    private Course course ;
+
+    private Student student;
+    public static Course course;
+
     private JFrame frame;
 
-    public lessons(Student student,Course course) {
+    public lessons(Student student, Course course) {
         this.student = student;
         this.course = course;
         initComponents();
@@ -52,6 +56,7 @@ public class lessons extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         updateButton2 = new javax.swing.JButton();
         updateButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -206,7 +211,7 @@ public class lessons extends javax.swing.JPanel {
         updateButton2.setBackground(new java.awt.Color(102, 102, 102));
         updateButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         updateButton2.setForeground(new java.awt.Color(255, 255, 255));
-        updateButton2.setText("view optional resources");
+        updateButton2.setText("view  resources");
         updateButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButton2ActionPerformed(evt);
@@ -223,6 +228,16 @@ public class lessons extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("get Quiz");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,12 +248,15 @@ public class lessons extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(updateButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(updateButton2))
-                        .addGap(208, 208, 208)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(updateButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
+                            .addComponent(updateButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -252,14 +270,15 @@ public class lessons extends javax.swing.JPanel {
                 .addComponent(jLabel11)
                 .addGap(13, 13, 13)
                 .addComponent(EDIT_TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -287,95 +306,157 @@ public class lessons extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void updateButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton2ActionPerformed
-    int r = lessons.getSelectedRow();
-    if (r >= 0) {
-        String lessonId = lessons.getValueAt(r, 0).toString();
-        Lesson lesson = course.getLessonById(lessonId); 
+        int r = lessons.getSelectedRow();
+        if (r >= 0) {
+            String lessonId = lessons.getValueAt(r, 0).toString();
+            Lesson lesson = course.getLessonById(lessonId);
 
-        
-        List<String> resources = lesson.getResources();
-        String resourcesText = String.join("\n", resources);
+            List<String> resources = lesson.getResources();
+            String resourcesText = String.join("\n", resources);
 
-        
-        READING p = new READING(lesson.getTitle(),resourcesText);
-        p.setVisible(true);
-    }
+            READING p = new READING(lesson.getTitle(), resourcesText);
+            p.setVisible(true);
+        }
         // GET CONTENT  FROM DATABASE AND WRITE IT IN PANEL READING
     }//GEN-LAST:event_updateButton2ActionPerformed
 
     private void updateButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButton3ActionPerformed
 
-      int r = lessons.getSelectedRow();
-    if (r >= 0) {
-        String lessonId = lessons.getValueAt(r, 0).toString();
-        Lesson lesson = course.getLessonById(lessonId); 
-        
-        READING p = new READING(lesson.getTitle(),lesson.getContent());
-        p.setVisible(true);        
-        
-        StudentService ss = new StudentService();
-        Course currentCourse = course;
-        if (currentCourse != null) {
-            ss.lessonAccess(student, currentCourse, currentCourse.getLessonById(lessonId));
-        }
+        int r = lessons.getSelectedRow();
+        if (r >= 0) {
+            String lessonId = lessons.getValueAt(r, 0).toString();
+            Lesson lesson = course.getLessonById(lessonId);
 
-        loadLessonsTable();
-    }
+            READING p = new READING(lesson.getTitle(), lesson.getContent());
+            p.setVisible(true);
+
+            if (lesson.getQuiz() == null) {
+                StudentService ss = new StudentService();
+                Course currentCourse = course;
+                /* if (currentCourse != null) {
+            ss.lessonAccess(student, currentCourse, lesson);
+        }*/
+            }
+
+            loadLessonsTable();
+        }
     }//GEN-LAST:event_updateButton3ActionPerformed
 
-    
-    
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Quiz quiz;
+        Lesson lesson;
+        progress p;
+        int r = lessons.getSelectedRow();
+        if (r >= 0) {
+            String lessonId = lessons.getValueAt(r, 0).toString();
+            lesson = course.getLessonById(lessonId);
 
-    
-    
-  private void loadLessonsTable() {
-    DefaultTableModel model = (DefaultTableModel) lessons.getModel();
-    model.setRowCount(0); 
+            if (lesson.getQuiz() != null) {
+                quiz = lesson.getQuiz();
 
-    if (course == null || student == null) return;
+                if (quiz == null) {
+                    JOptionPane.showMessageDialog(this,
+                            "No quiz here",
+                            "sorry no quiz",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
-    List<Lesson> lessonList = course.getLessons();
-    progress courseProgress = null;
-    
-    
-    
-    
-    
-    for (progress p : student.getProgress()) {
+                /* p = student.getProgressForCourse(course.getId());
         
-        if (p.getCourseId().equals(course.getId())) {
-            courseProgress = p;
-            break;
+        int remainingAttempts = p.getRemainingTries(quiz);
+        
+        System.out.println(remainingAttempts);
+
+        if (remainingAttempts > 0) {
+            
+            
+            StudentQuizRecord ss = new StudentQuizRecord(lesson);
+            ss = p.startAttempt(lesson);
+            
+            Quiz_DO q = new Quiz_DO(this,student, lesson,ss);
+            q.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "You have no remaining attempts for this quiz.",
+                "No Attempts Left", 
+                JOptionPane.WARNING_MESSAGE);
+        }*/
+                p = student.getProgressForCourse(course.getId());
+
+                if (p.getRemainingTries(quiz, lesson) > 0) {
+                    StudentQuizRecord ss = p.startAttempt(lesson);
+                    int remainingAttempts = p.getRemainingTries(quiz, lesson);
+
+                    System.out.println("Remaining attempts after starting: " + remainingAttempts);
+
+                    Quiz_DO q = new Quiz_DO(this, student, lesson, ss);
+                    q.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "You have no remaining attempts for this quiz.",
+                            "No Attempts Left",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+
+                StudentService ss = new StudentService();
+                Course currentCourse = course;
+                if (currentCourse != null) {
+                    if (ss.hasPassedQuiz(student, quiz,course.getId())) {
+                        ss.lessonAccess(student, currentCourse, currentCourse.getLessonById(lessonId));
+                    }
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "This lesson has no quiz available.",
+                        "No Quiz",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void LoadLessonsTable() {
+        loadLessonsTable();
+    }
+
+    private void loadLessonsTable() {
+        DefaultTableModel model = (DefaultTableModel) lessons.getModel();
+        model.setRowCount(0);
+
+        if (course == null || student == null) {
+            return;
+        }
+
+        List<Lesson> lessonList = course.getLessons();
+        progress courseProgress = null;
+
+        for (progress p : student.getProgress()) {
+
+            if (p.getCourseId().equals(course.getId())) {
+                courseProgress = p;
+                break;
+            }
+        }
+
+        if (courseProgress == null) {
+            return;
+        }
+
+        System.out.println("done");
+        for (Lesson lesson : lessonList) {
+            String status = courseProgress.isLessonCompleted(lesson.getId())
+                    ? "COMPLETED" : "NOT_COMPLETED";
+
+            model.addRow(new Object[]{lesson.getId(), lesson.getTitle(), status});
         }
     }
-    
-    
-    if (courseProgress == null) return;
-    
-    System.out.println("done");
-    for (Lesson lesson : lessonList) {
-        String status = courseProgress.isLessonCompleted(lesson.getId()) 
-                        ? "COMPLETED" : "NOT_COMPLETED";
 
-        model.addRow(new Object[]{ lesson.getId(), lesson.getTitle(), status });
-    }
-}  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JScrollPane EDIT_TABLE;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JDialog jDialog1;

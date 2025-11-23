@@ -1,8 +1,8 @@
 package Instructor_Management;
 
-import services.Validation;
+import databaseservice.Validation;
 import backend.Course;
-import services.CourseService;
+import databaseservice.CourseService;
 import backend.*;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;

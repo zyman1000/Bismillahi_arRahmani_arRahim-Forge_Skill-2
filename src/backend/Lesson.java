@@ -6,6 +6,7 @@ public class Lesson extends AbstractDisplay {
 
     private String content;
     private List<String> resources;
+    private Quiz quiz;
 
     public Lesson() {
 
@@ -13,6 +14,22 @@ public class Lesson extends AbstractDisplay {
     }
 
     //setters w getters
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+    
+    
+    public boolean hasQuiz() {
+        return quiz != null;
+    }
+    
+    
+    
+    
     public String getContent() {
         return content;
     }

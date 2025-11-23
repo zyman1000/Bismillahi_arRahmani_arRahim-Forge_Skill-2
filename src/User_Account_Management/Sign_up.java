@@ -1,6 +1,6 @@
 package User_Account_Management;
-import services.UserService;
-import services.Validation;
+import databaseservice.UserService;
+import databaseservice.Validation;
 import backend.*;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -256,7 +256,7 @@ public class Sign_up extends javax.swing.JFrame {
 
         roleSelection.setBackground(new java.awt.Color(0, 51, 102));
         roleSelection.setForeground(new java.awt.Color(255, 255, 255));
-        roleSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Instructor", "Admin" }));
+        roleSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Instructor" }));
         roleSelection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleSelectionActionPerformed(evt);
@@ -372,7 +372,17 @@ public class Sign_up extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(frame, error_msg);
         else{
             String role = roleSelection.getSelectedItem().toString();
-            User user = UserService.signup(username, email, pass1, role);
+            User user;
+            if(role.equals(UserService.StudentRole)){
+                user = UserService.signup(username, email, pass1, role);
+                
+            }
+            else if(role.equals(UserService.InstructorRole)){
+                user = UserService.signup(username, email, pass1, role);
+            }
+            else{
+                user = null;
+            }
             if(user != null){
                 this.dispose();
                 new login().setVisible(true);
@@ -476,6 +486,10 @@ public class Sign_up extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userField2ActionPerformed
 
+    private void roleSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleSelectionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_roleSelectionActionPerformed
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        new welcome().setVisible(true);
        this.dispose();     // TODO add your handling code here:
@@ -508,10 +522,6 @@ public class Sign_up extends javax.swing.JFrame {
     private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFieldActionPerformed
-
-    private void roleSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleSelectionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_roleSelectionActionPerformed
 
      
     // Variables declaration - do not modify//GEN-BEGIN:variables

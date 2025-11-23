@@ -1,14 +1,9 @@
 package Student_Managment;
-
-
-import services.StudentService;
+import databaseservice.StudentService;
 import User_Account_Management.*;
 import javax.swing.JFrame;
 import backend.*;
-import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
-import services.CertificateService;
-import services.CourseService;
 
 
 public class Enrolled_courses extends javax.swing.JPanel {
@@ -55,7 +50,6 @@ public class Enrolled_courses extends javax.swing.JPanel {
         EDIT_TABLE = new javax.swing.JScrollPane();
         enrolled = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
-        certificate = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -211,16 +205,6 @@ public class Enrolled_courses extends javax.swing.JPanel {
             }
         });
 
-        certificate.setBackground(new java.awt.Color(102, 102, 102));
-        certificate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        certificate.setForeground(new java.awt.Color(255, 255, 255));
-        certificate.setText("get certificate");
-        certificate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                certificateActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,15 +212,12 @@ public class Enrolled_courses extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(certificate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(EDIT_TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
@@ -254,8 +235,7 @@ public class Enrolled_courses extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(certificate, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -300,16 +280,6 @@ public class Enrolled_courses extends javax.swing.JPanel {
         new StudentDashboard(student).setVisible(true);
         frame.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void certificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_certificateActionPerformed
-        // TODO add your handling code here:
-        CourseService service = new CourseService();
-        int r = enrolled.getSelectedRow();
-        if(r == -1)
-            return;
-        String courseID = enrolled.getValueAt(r, 0).toString();
-        new CERTIFICATE(courseID, student, true).setVisible(true);
-    }//GEN-LAST:event_certificateActionPerformed
     
     
     
@@ -346,7 +316,6 @@ public class Enrolled_courses extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JScrollPane EDIT_TABLE;
-    private javax.swing.JButton certificate;
     public javax.swing.JTable enrolled;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

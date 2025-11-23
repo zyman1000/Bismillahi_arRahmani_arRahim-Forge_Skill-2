@@ -1,5 +1,5 @@
 package Student_Managment;
-import services.StudentService;
+import databaseservice.StudentService;
 import java.util.List;
 import User_Account_Management.StudentDashboard;
 import User_Account_Management.welcome;
