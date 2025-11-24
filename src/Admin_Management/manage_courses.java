@@ -1,7 +1,7 @@
 
 package Admin_Management;
 import User_Account_Management.AdminDashboard;
-import services.*;
+import databaseservice.*;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import backend.Course;

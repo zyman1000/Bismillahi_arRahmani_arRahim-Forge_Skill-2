@@ -117,9 +117,10 @@ public class AddQuiz_fram extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Add_new_question_frame addQuestionFrame = new Add_new_question_frame(quiz);
+        Add_new_question_frame addQuestionFrame = new Add_new_question_frame(quiz, this);
         addQuestionFrame.setVisible(true);
-        // this.dispose();
+         this.dispose();
+         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

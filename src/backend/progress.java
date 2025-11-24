@@ -115,7 +115,7 @@ public class progress {
 
     // عدد محاولات Quiz لدرس معيّن
     public int getAttemptsForQuiz(Quiz quiz, Lesson lesson) {
-        int count = 0;
+      /*  int count = 0;
 
         for (StudentQuizRecord r : LPlist) {
             if (r.getQuiz(courseId).getId() == quiz.getId()
@@ -125,19 +125,49 @@ public class progress {
                 count++;
             }
         }
-        return count;
+        return count;*/
+          for (StudentQuizRecord r : LPlist) {
+        if (r.getQuiz(courseId).getId() == quiz.getId()
+            && r.getLesson(courseId).getId().equals(lesson.getId())) {
+            
+            if (r.isPassed()) {
+                return 1; 
+            }
+            return r.getNumberOfTryAtAttempt(); 
+        }
+    }
+    return 0; 
     }
 
-    // عدد المحاولات المتبقية
+    
     public int getRemainingTries(Quiz quiz, Lesson lesson) {
         return quiz.getNumberOfTry() - getAttemptsForQuiz(quiz, lesson);
     }
+    
+    public StudentQuizRecord findRecordForLesson(Lesson lesson) {
+    for (StudentQuizRecord r : LPlist) {
+        if (r.getLessonId().equals(lesson.getId())) {
+            return r; 
+        }
+    }
+    return null; 
+}
 
     // بدء Attempt جديدة
     public StudentQuizRecord startAttempt(Lesson lesson) {
-        StudentQuizRecord record = new StudentQuizRecord(lesson);
+       /* StudentQuizRecord record = new StudentQuizRecord(lesson);
         LPlist.add(record);
-        return record;
+        return record;*/
+    StudentQuizRecord existing = findRecordForLesson(lesson); 
+    if (existing != null) {
+        
+        return existing;
+    } else {
+       
+        StudentQuizRecord newRecord = new StudentQuizRecord(lesson);
+        LPlist.add(newRecord);  
+        return newRecord;
+    }
     }
 
     // تحديث Attempt موجودة
@@ -154,6 +184,17 @@ public class progress {
     
     public List<StudentQuizRecord> getQuizRecords() {
     return LPlist;
+}
+    
+    
+    public boolean canAttemptQuiz(Quiz quiz, Lesson lesson) {
+    for (StudentQuizRecord r : LPlist) {
+        if (r.getQuiz(courseId).getId() == quiz.getId()
+            && r.getLesson(courseId).getId().equals(lesson.getId())) {
+            return !r.isPassed(); 
+        }
+    }
+    return true; 
 }
 
 }

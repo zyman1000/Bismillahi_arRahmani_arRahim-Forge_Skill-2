@@ -60,6 +60,9 @@ public class JsonDataBaseManager {
             else if(role.equals(UserService.InstructorRole)){
                 curr = gson.fromJson(jobj, Instructor.class);
             }
+            else if(role.equals(UserService.AdminRole)){
+                curr = gson.fromJson(jobj, Admin.class);
+            }
             else
                 curr = null;
             users.add(curr);
@@ -90,7 +93,7 @@ public class JsonDataBaseManager {
         }
     }
    
-    public static void loadFiles(){
+    private static void loadFiles(){
         readUsers();
         readCourses();
     }
@@ -165,6 +168,9 @@ public class JsonDataBaseManager {
         }
         saveCourses();
 
+    }
+    public static void updateCourses(){
+        saveCourses();
     }
    
     public static void removeUser(User u){

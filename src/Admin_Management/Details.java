@@ -1,6 +1,6 @@
 package Admin_Management;
-import Student_Managment.*;
-import services.StudentService;
+//import Student_Managment;
+import databaseservice.StudentService;
 import javax.swing.table.DefaultTableModel;
 import backend.*;
 import User_Account_Management.welcome;

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package User_Account_Management;
-import Adming_Management.manage_courses;
+import Admin_Management.manage_courses;
 /**
  *
  * @author zeyad

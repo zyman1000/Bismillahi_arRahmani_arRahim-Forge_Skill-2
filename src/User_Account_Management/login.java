@@ -6,7 +6,7 @@ import backend.User;
 import databaseservice.UserService;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-
+import backend.Admin;
 public class login extends javax.swing.JFrame {
     
     public login() {
@@ -170,7 +170,7 @@ public class login extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, Short.MAX_VALUE)
                 .addGap(333, 333, 333))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -238,7 +238,7 @@ public class login extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(0, 51, 102));
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Instructor" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Instructor", "Admin" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -318,8 +318,11 @@ public class login extends javax.swing.JFrame {
         else{
             if (selectedRole.equals(UserService.StudentRole)) {
                 new StudentDashboard((Student) user).setVisible(true);
-            } else {
+            } else if(selectedRole.equals(UserService.InstructorRole)) {
                  new InstructorDashboard((Instructor) user).setVisible(true);
+            }
+            else if(selectedRole.equals(UserService.AdminRole)){
+                new AdminDashboard().setVisible(true);
             }
             this.dispose();
         }

@@ -7,20 +7,21 @@ import java.util.*;
 public class Student extends User {
       private List<String> courses;
       private List<progress> progressList;
-    //  private List<StudentQuizRecord> quizRecords = new ArrayList<>();
-      
-    //************************************************************************//
-   public Student(String id, String name, String email, String pass,List<String> courses, List<progress> progressList) 
+      private List<Certificate> certificates;
+      //**********************************************************************//
+   public Student(String id, String name, String email, String pass,List<String> courses, List<progress> progressList, List<Certificate> certificates) 
     {
         super(id, name, email, pass, UserService.StudentRole);
         this.courses =  new ArrayList<>(courses);
         this.progressList = progressList;
+        this.certificates = certificates;
     }
    public Student(String id, String name, String email, String pass) 
     {
         super(id, name, email, pass, UserService.StudentRole);
         this.courses =  new ArrayList<>();
         this.progressList = new ArrayList<>();
+        this.certificates = new ArrayList<>();
     }
     
     public String getRole()
@@ -55,25 +56,10 @@ public class Student extends User {
         progressList.add(newProgress);
         return newProgress;
     }
-    
-    
-    
-
-  /*  public void addQuizRecord(StudentQuizRecord record) {
-    quizRecords.add(record);
-}
-    
-    public List<StudentQuizRecord> getQuizRecords() {
-    return quizRecords;
-}
-    
-    public int getAttemptsForQuiz(Quiz quiz) {
-        int count = 0;
-        for (StudentQuizRecord r : quizRecords) {
-            if (r.getQuiz().getId() == quiz.getId()) {
-                count++;
-            }
-        }
-        return count;
-    }*/
+    public List<Certificate> getCertificates(){
+        return this.certificates;
+    }
+    public void addCertificate(Certificate certificate){
+        this.certificates.add(certificate);
+    }
 }

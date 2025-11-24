@@ -12,7 +12,9 @@ import javax.swing.SwingUtilities;
 public class Add_new_question_frame extends javax.swing.JFrame {
 
     private Quiz quiz;
-    public Add_new_question_frame(Quiz quiz) {
+    private javax.swing.JFrame parent;
+    public Add_new_question_frame(Quiz quiz, javax.swing.JFrame parent) {
+        this.parent = parent;
         this.quiz = quiz;
         initComponents();
     }
@@ -191,7 +193,7 @@ public class Add_new_question_frame extends javax.swing.JFrame {
         jTextField6.setText("");
         jTextField7.setText("");
         
-        
+        parent.setVisible(true);
         this.dispose();
         
         

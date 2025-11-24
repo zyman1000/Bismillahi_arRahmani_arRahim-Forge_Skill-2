@@ -161,4 +161,36 @@ public class CourseService {
     }
     return null;
 }
+public static List<Course> getCourseByStatus(String status){
+        if(!status.equals(Course.ACCEPTED) && !status.equals(Course.PENDING)){
+            System.out.println("invalid course state");
+            return null;
+        }
+        List<Course> courses = JsonDataBaseManager.getCourses();
+        List<Course> returnResult = new ArrayList<>();
+        for(Course c : courses){
+            if(c.getApprovalStatus().equals(Course.PENDING)){
+                returnResult.add(c);
+            }
+        }
+        return returnResult;
+    }
+    private static void modifyCourseStatus(String courseID, String status){
+       List<Course> courses = JsonDataBaseManager.getCourses();
+       for(Course c : courses){
+           if(c.getId().equals(courseID)){
+               c.setApprovalStatus(status);
+               System.out.println("COURSE STATUS SET TO ACCEPTED");
+               break;
+           }
+       }
+       JsonDataBaseManager.updateCourses();
+    }
+    public static void AcceptCourse(String courseID){
+       modifyCourseStatus(courseID, Course.ACCEPTED);
+    }
+    public static void rejectCourse(String courseID){
+        modifyCourseStatus(courseID, Course.REJECTED); 
+    }
+    
 }

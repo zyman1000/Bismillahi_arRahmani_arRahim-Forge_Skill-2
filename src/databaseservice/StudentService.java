@@ -130,12 +130,13 @@ public class StudentService {
 
     public List<Course> getAllAvailableCourses() {
         List<Course> courses = JsonDataBaseManager.getCourses();
-
-        if (courses == null) {
-            return new ArrayList<>();
+        List<Course> result = new ArrayList<>();
+        for(Course c : courses){
+            if(c.getApprovalStatus().equals(Course.ACCEPTED)){
+                result.add(c);
+            }
         }
-
-        return new ArrayList<>(courses);
+        return result;
     }
 
     public Course getCoursebyid(String courseId) {

@@ -25,7 +25,7 @@ public class StudentQuizRecord {
         this.passed = passed;
         Quiz quiz = lesson.getQuiz();
         this.passScoreAtAttempt = quiz.getPassScore();
-        this.numberOfTryAtAttempt = quiz.getNumberOfTry();
+        this.numberOfTryAtAttempt = 0;
        
     }
     
@@ -41,7 +41,7 @@ public class StudentQuizRecord {
         
         
                 this.passScoreAtAttempt = quiz.getPassScore();
-        this.numberOfTryAtAttempt = quiz.getNumberOfTry();
+        this.numberOfTryAtAttempt = 0;
         
         
     }
@@ -53,10 +53,19 @@ public class StudentQuizRecord {
     public void complete(Student student,double score, boolean passed) {
         this.score = score;
         this.passed = passed;
-        JsonDataBaseManager.updateUser(student);
+           
+    
+        this.numberOfTryAtAttempt++;
+    
+
+   
+    JsonDataBaseManager.updateUser(student);
         
        
     }
+    
+    
+ 
     
 
     

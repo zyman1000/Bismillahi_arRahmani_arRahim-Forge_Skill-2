@@ -361,28 +361,16 @@ public class lessons extends javax.swing.JPanel {
                             JOptionPane.WARNING_MESSAGE);
                     return;
                 }
-
-                /* p = student.getProgressForCourse(course.getId());
-        
-        int remainingAttempts = p.getRemainingTries(quiz);
-        
-        System.out.println(remainingAttempts);
-
-        if (remainingAttempts > 0) {
-            
-            
-            StudentQuizRecord ss = new StudentQuizRecord(lesson);
-            ss = p.startAttempt(lesson);
-            
-            Quiz_DO q = new Quiz_DO(this,student, lesson,ss);
-            q.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, 
-                "You have no remaining attempts for this quiz.",
-                "No Attempts Left", 
-                JOptionPane.WARNING_MESSAGE);
-        }*/
-                p = student.getProgressForCourse(course.getId());
+        p = student.getProgressForCourse(course.getId());
+                 if (!p.canAttemptQuiz(quiz, lesson))
+        {
+                    JOptionPane.showMessageDialog(this,
+                            "you already passed this quiz",
+                            "sorry you can NOT re the quiz",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;            
+        }
+                
 
                 if (p.getRemainingTries(quiz, lesson) > 0) {
                     StudentQuizRecord ss = p.startAttempt(lesson);

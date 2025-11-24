@@ -10,6 +10,7 @@ public class UserService {
 
     public static final String StudentRole = "Student";
     public static final String InstructorRole = "Instructor";
+    public static final String AdminRole = "Admin";
 
     public static User login(String username, String password, String role) {
         String encrypted = encrypt(password);
@@ -39,7 +40,13 @@ public class UserService {
             Instructor I = new Instructor(generateID(), username, email, encrypt(password));
             JsonDataBaseManager.addUser(I);
             return I;
-        } else {
+        } 
+        else if (role.equals(AdminRole)){
+            Admin a = new Admin(generateID(), username, email, encrypt(password));
+            JsonDataBaseManager.addUser(a);
+            return a;
+        }
+        else{
             return null; //incorrect role
         }
     }
@@ -76,7 +83,7 @@ public class UserService {
         return null;
     }
 
-    private static String generateID() { //make sure ID is not repeated
+    public static String generateID() { //make sure ID is not repeated
         int IDint = (int) (Math.random() * 10001);
         String ID_str = Integer.toString(IDint);
         while (ID_str.length() < 5) {

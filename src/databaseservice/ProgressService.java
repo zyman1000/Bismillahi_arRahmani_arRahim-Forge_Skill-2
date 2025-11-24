@@ -56,6 +56,16 @@ public class ProgressService {
         }        
         return 0;
     }
+    public static boolean isCourseCompleted(String sid, String cid){
+        int completedLessons = get_completedlessons_student(sid, cid);
+        Course c = (new CourseService()).getCoursebyid(cid);
+        int lessonsSize = c.getLessons().size();
+        if(completedLessons == lessonsSize){
+            return true;
+        }
+        else
+            return false;
+    }
 
 public static List<StudentQuizRecord> getQuizMarks_allstudents_ForLesson(String courseId, String lessonId) {
 

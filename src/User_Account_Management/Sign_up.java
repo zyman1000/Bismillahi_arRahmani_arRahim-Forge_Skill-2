@@ -256,7 +256,7 @@ public class Sign_up extends javax.swing.JFrame {
 
         roleSelection.setBackground(new java.awt.Color(0, 51, 102));
         roleSelection.setForeground(new java.awt.Color(255, 255, 255));
-        roleSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Instructor" }));
+        roleSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Instructor", "Admin" }));
         roleSelection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleSelectionActionPerformed(evt);
@@ -372,17 +372,7 @@ public class Sign_up extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(frame, error_msg);
         else{
             String role = roleSelection.getSelectedItem().toString();
-            User user;
-            if(role.equals(UserService.StudentRole)){
-                user = UserService.signup(username, email, pass1, role);
-                
-            }
-            else if(role.equals(UserService.InstructorRole)){
-                user = UserService.signup(username, email, pass1, role);
-            }
-            else{
-                user = null;
-            }
+            User user = UserService.signup(username, email, pass1, role);
             if(user != null){
                 this.dispose();
                 new login().setVisible(true);
